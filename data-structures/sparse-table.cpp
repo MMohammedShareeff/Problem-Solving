@@ -56,7 +56,7 @@ void solve()
 	// get the minimmum within a range [l, r]
 	// just change within the merge to get everything else
 	// overlapping should not effect the final answer to be able to use sparse table
-	// gcd(2, 3) = gcd(2, 3, 2) while sum(2, 3) != sum(2, 3, 2) so we can not use sparse with summations.
+	// gcd(2, 3) = gcd(2, 3, 2) while sum(2, 3) != sum(2, 3, 2) so we can not use sparse with
 	int n, q; cin >> n >> q;
 	vector<int> v(n);
 	for (int i = 0; i < n; i++) {
