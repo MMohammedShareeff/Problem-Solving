@@ -17,7 +17,6 @@ int dy[] = { +0, +0, -1, +1, +1, -1, -1, +1};
 const double PI = 4 * atan(1);
 
 struct ST {
-
 	vector<vector<int>> data;
 	vector<int> logs;
 

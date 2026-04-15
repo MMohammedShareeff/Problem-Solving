@@ -18,7 +18,6 @@ const double PI = 4 * atan(1);
 
 // coordinate-compression (1-indexed)
 struct Compressor {
-
 	vector<int> vals;
 
 	void add(int x) {
