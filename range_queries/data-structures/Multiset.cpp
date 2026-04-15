@@ -16,7 +16,7 @@ int dy[] = { +0, +0, -1, +1, +1, -1, -1, +1};
 
 const double PI = 4 * atan(1);
 
-// Multiset using fenwick tree
+// Multiset using fenwick tree - 1 Indexed
 // Problem Link: https://codeforces.com/problemset/problem/1354/D
 struct MultiSet {
 
