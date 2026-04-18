@@ -116,12 +116,13 @@ struct SegTree {
 			return lx;
 		}
 
+		int base = 2 * node;
 		int mid = lx + (rx - lx) / 2;
-		int res = lower_bound(x, l, r, 2 * node + 1, lx, mid);
+		int res = lower_bound(x, l, r, base + 1, lx, mid);
 		if (res != -1) {
 			return res;
 		}
-		return lower_bound(x, l, r, 2 * node + 2, mid, rx);
+		return lower_bound(x, l, r, base + 2, mid, rx);
 	}
 
 	int lower_bound(int x, int l = 0, int r = -1) {
