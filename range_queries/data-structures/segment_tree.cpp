@@ -26,8 +26,6 @@ struct Node {
 	}
 };
 
-
-// updates to the code within the merge and the node struct above
 struct SegTree {
 	int tree_size;
 	vector<Node> data;
@@ -42,7 +40,7 @@ struct SegTree {
 	}
 
 	Node merge(const Node & lft, const Node & ryt) {
-		return Node{lft.sum + ryt.sum};
+		return Node(lft.sum + ryt.sum);
 	}
 
 	void build(const vector<int> & arr, int node, int lx, int rx) {
@@ -106,10 +104,34 @@ struct SegTree {
 		return merge(lft, ryt);
 	}
 
-	Node get(int l, int r) {
-		return get(l, r, 0, 0, tree_size);
+	int get(int l, int r) {
+		return get(l, r, 0, 0, tree_size).sum;
+	}
+
+	int lower_bound(int x, int l, int r, int node, int lx, int rx) {
+		if (rx <= l or lx >= r or data[node].sum < x) {
+			return -1;
+		}
+		if (rx - lx == 1) {
+			return lx;
+		}
+
+		int mid = lx + (rx - lx) / 2;
+		int res = lower_bound(x, l, r, 2 * node + 1, lx, mid);
+		if (res != -1) {
+			return res;
+		}
+		return lower_bound(x, l, r, 2 * node + 2, mid, rx);
+	}
+
+	int lower_bound(int x, int l = 0, int r = -1) {
+		if (r == -1) {
+			r = tree_size;
+		}
+		return lower_bound(x, l, min(r, tree_size), 0, 0, tree_size);
 	}
 };
+
 
 // problem link: https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A
 // update points and get summation in a range.
@@ -133,7 +155,7 @@ void solve()
 		}
 		else {
 			int l, r; cin >> l >> r;
-			cout << tree.get(l, r).sum << endl;
+			cout << tree.get(l, r) << endl;
 		}
 	}
 }
