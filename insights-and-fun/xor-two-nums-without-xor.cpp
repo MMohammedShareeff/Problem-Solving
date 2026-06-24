@@ -16,47 +16,47 @@ int dy[] = { +0, +0, -1, +1, +1, -1, -1, +1};
 
 const double PI = 4 * atan(1);
 
-string binary(int n) {
+string getBinary(int n) {
     string bin = "";
     while (n / 2 != 0) {
         bin.push_back(to_string(n % 2)[0]);
         n /= 2;
     }
+
     bin.push_back(to_string(n)[0]);
     reverse(bin.begin(), bin.end());
     return bin;
 }
 
+string convTo32Binary(int decimal) {
+    string binary = getBinary(decimal);
 
-void solve()
-{
-    int a, b; cin >> a >> b;
-    string bina(32, '0');
-    string binb(32, '0');
-
-    string tmpa = binary(a);
-    for (int i = 31, j = tmpa.size() - 1; j >= 0; i--, j--) {
-        bina[i] = tmpa[j];
+    string binary32(32, '0');
+    for (int i = 31, j = binary.size() - 1; j >= 0; i--, j--) {
+        binary32[i] = binary[j];
     }
 
-    string tmpb = binary(b);
-    for (int i = 31, j = tmpb.size() - 1; j >= 0; i--, j--) {
-        binb[i] = tmpb[j];
-    }
+    return binary32;
+}
 
-    string temp(32, '0');
-    for (int i = 0; i < 32; i++) {
-        temp[i] = (bina[i] == binb[i] ? '0' : '1');
-    }
+int XOR(int a, int b) {
+    string bina = convTo32Binary(a);
+    string binb = convTo32Binary(b);
 
     int ans = 0;
     for (int i = 31, weight = 1; i >= 0; i--, weight *= 2) {
-        if (temp[i] == '1') {
+        if (bina[i] != binb[i]) {
             ans += weight;
         }
     }
 
-    cout << ans << endl;
+    return ans;
+}
+
+void solve()
+{
+    int a, b; cin >> a >> b;
+    cout << XOR(a, b);
 }
 
 int32_t main()
